@@ -2,8 +2,8 @@ POST http://localhost:8800/api/auth/register HTTP/1.0
 content-type: application/json
 
 {
-    "username": "Matios Hotel ",
-    "email" : "mehassssssrddddi@example.com",
+    "username": "Mjjatios Hotel ",
+    "email" : "mehjjassssssrddddi@example.com",
     "country":"Ethiopia",
     "img":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/90/d3/a2/restaurant.jpg?w=1100&h=-1&s=1",
     "city": "Addis Ababa",
