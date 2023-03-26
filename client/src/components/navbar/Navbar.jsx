@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import logo from '../../assets/images/icon.svg';
-import LoginBtn from "../LogIn/Register/login";
-import SignupBtn from "../LogIn/Register/signup";
+import LoginBtn from "../LogIn/login";
+import SignupBtn from "../Register/signup";
 const Navbar = () => {
   const login = "Login";
   const register = "Register";
