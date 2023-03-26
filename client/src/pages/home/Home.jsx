@@ -1,4 +1,4 @@
-import Featured from "../../components/featured/Featured";
+import Featured from "../../components/featured/Featured.jsx";
 import FeaturedProperties from "../../components/featuredProperties/FeaturedProperties";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
