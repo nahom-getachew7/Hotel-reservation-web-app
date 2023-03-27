@@ -17,7 +17,12 @@ const Navbar = () => {
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
         <img  src={logo} alt=" Logo" style={{paddingTop:25 ,height:'160px' , width:'160px'}} />
         </Link>
-        {user ? user.username : (
+        {user ?  (
+  <div className="navItems">
+    <div className="navButton">{user.username}</div>
+    <div className="navButton">Logout</div>
+    </div>
+)  : (
           <div className="navItems">
             <div className="navButton"><SignupBtn name={register}/></div>
             <div className="navButton"><LoginBtn name={login}/></div>
