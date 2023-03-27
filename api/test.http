@@ -1,0 +1,78 @@
+POST http://localhost:8800/api/auth/register HTTP/1.0
+content-type: application/json
+
+{
+    "username": "Mjjatios Hotel ",
+    "email" : "mehjjassssssrddddi@example.com",
+    "country":"Ethiopia",
+    "img":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/90/d3/a2/restaurant.jpg?w=1100&h=-1&s=1",
+    "city": "Addis Ababa",
+    "phone": "0973997144",
+    "password": "mehari",
+    "isAdmin": true,
+    "timestamps":true
+}
+
+###
+
+
+
+
+
+
+
+POST http://localhost:8800/api/hotels HTTP/1.0
+content-type: application/json
+ 
+{
+"name": "T Hotel",
+  "type":"Big hotel adj",
+  "city": "Addis Ababa df",
+  "address": "sdf Akaki kaliti",
+  "distance":"500 km",
+  "photos":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSD3pTRdTvudKaybyBJm9pTuS6sshiNEPrVA&usqp=CAU",
+  "title":"dfthe bigest hotel",
+  "desc":" good",
+  "rating": 5,
+  "rooms": "7",
+  "cheapestPrice": 899,
+  "featured":true
+}
+
+###
+POST http://localhost:8800/api/rooms/641b57d0838f8bae052f29e3 HTTP/1.0
+content-type: application/json
+ 
+ {
+"title":" the bigest hotel",
+    "price": 889,
+    "maxPeople": 8,
+    "desc": "lsdfkjlj lsdjfl lkdjf ",
+    "roomNumbers": [{ "number": 899, "unavailableDates": "2023-08-12"}],
+  "timestamps": true 
+  }
+
+###
+
+POST http://localhost:8800/api/auth/login HTTP/1.0
+content-type: application/json
+
+{
+    "username": "Matios",
+    "password": "mehari"
+  
+}
+
+###
+
+PUT http://localhost:8800/api/hotels/641b5b8f0486c22831164ca1 HTTP/1.0
+Content-Type: application/json
+
+{
+"name":"updated type"
+}
+
+###
+
+delete http://localhost:8800/api/hotels/641d664d587e7a3c1a5f7c21 HTTP/1.0
+Content-Type: application/json

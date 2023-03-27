@@ -16,13 +16,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../../context/AuthContext";
+import LoginBtn from "../LogIn/login";
 const theme = createTheme();
 
-
 export default function SignupBtn(props) {
-    const [open, setOpen] = React.useState(false);
 
+    const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -30,19 +33,64 @@ export default function SignupBtn(props) {
     const handleCloses = () => {
       setOpen(false);
     };
-  
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-      };
+    const [credentials, setCredentials] = useState({
+      username:undefined,
+    email : undefined,
+    country:"",
+    img:"",
+    city:"",
+    phone: "",
+    password: undefined,
+    isAdmin: undefined
+  });
+
+ 
+  // const { loading, error, dispatch } = useContext(AuthContext);
+
+const navigate = useNavigate()
+
+const handleChange = (e) => {
+  setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+};
+
+const handleClick = async (e) => {
+  e.preventDefault();
+  // console.log(credentials["username"])
+  let result
+  try {
+     result = await axios.post(         
+      "http://localhost:8800/api/auth/register",         
+      {  
+    username: credentials["username"],
+    email :  credentials["email"],
+    img:credentials["img"],
+    city:credentials["city"],
+    phone: credentials["phone"],
+    password: credentials["password"],
+    isAdmin: credentials["isAdmin"]
+      }
+    );
+    // console.log(result["status"]);
+    // console.log(result["data"]);
+    if (result["data"] == "User has been created." && result["status"] =="200"){
+      console.log(result["status"]);
+      console.log(result["data"]);
+      alert("your haver registerd you can login now");
+      window.location.reload(false);
+     
+
+    
+    }
+
+  } catch (error) {
+    console.error(error.response.result);     
+  }
+};
+ 
 
   return (
     <div>
-     <button variant="outlined" className="headerBtn"  onClick={handleClickOpen}>{props.name}</button>
+     
            <Dialog open={open} onClose={handleCloses}>
         <DialogTitle>Sign in</DialogTitle>
         <DialogContent>
@@ -64,29 +112,20 @@ export default function SignupBtn(props) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleCloses} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="username"
+                  onChange={handleChange}
+                  label="Full Name"
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
+          
               <Grid item xs={12}>
                 <TextField
                   required
@@ -94,6 +133,7 @@ export default function SignupBtn(props) {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleChange}
                   autoComplete="email"
                 />
               </Grid>
@@ -103,6 +143,7 @@ export default function SignupBtn(props) {
                   fullWidth
                   name="password"
                   label="Password"
+                  onChange={handleChange}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -110,7 +151,7 @@ export default function SignupBtn(props) {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+             onClick={handleClick}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -127,6 +168,9 @@ export default function SignupBtn(props) {
           <Button onClick={handleCloses}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      <button variant="outlined" className="headerBtn"  onClick={handleClickOpen}>{props.name}</button>
     </div>
   );
 }
+
+

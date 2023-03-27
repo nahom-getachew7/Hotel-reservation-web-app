@@ -1,4 +1,7 @@
 import * as React from 'react';
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -16,13 +19,39 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SignupBtn from './signup';
+import { AuthContext } from "../../context/AuthContext";
+
 
 const theme = createTheme();
 
-
 export default function LoginBtn(props) {
-  const register = "Register"
+  //LogIN
+  const [credentials, setCredentials] = useState({
+    username: undefined,
+    password: undefined,
+  });
+
+  const { loading, error, dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("http://localhost:8800/api/auth/login", credentials);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/")
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+    }
+  };
+
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -33,14 +62,14 @@ export default function LoginBtn(props) {
       setOpen(false);
     };
   
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-      });
-    };
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //   event.preventDefault();
+    //   const data = new FormData(event.currentTarget);
+    //   console.log({
+    //     email: data.get('email'),
+    //     password: data.get('password'),
+    //   });
+    // };
 
   return (
     <div>
@@ -66,14 +95,19 @@ export default function LoginBtn(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
+              placeholder='username'
+              type= "text"
+              onChange={handleChange}
+              className="lInput"
               label="Email Address"
-              name="email"
+              id="username"
+              onChange={handleChange}
               autoComplete="email"
               autoFocus
             />
@@ -85,6 +119,10 @@ export default function LoginBtn(props) {
               label="Password"
               type="password"
               id="password"
+              onChange={handleChange}
+              className="lInput"
+              placeholder='Password'
+
               autoComplete="current-password"
             />
 
@@ -92,10 +130,14 @@ export default function LoginBtn(props) {
               type="submit"
               fullWidth
               variant="contained"
+              disabled={loading} 
+              onClick={handleClick} 
+              className="lButton"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
             </Button>
+            {error && <span>{error.message}</span>}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
