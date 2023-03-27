@@ -14,7 +14,6 @@ export default function Logout(){
     }
     return(
         <div>
-             {/* <button variant="outlined" className="headerBtn" onClick={logout}>Logout</button> */}
             <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }} onClick={logout} >
                 Logout
             </Link>
