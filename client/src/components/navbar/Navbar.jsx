@@ -20,7 +20,7 @@ const Navbar = () => {
         {user ?  (
   <div className="navItems">
     <div className="navButton">{user.username}</div>
-    <div className="navButton">Logout</div>
+    <div className="LogoutBtn">Logout</div>
     </div>
 )  : (
           <div className="navItems">

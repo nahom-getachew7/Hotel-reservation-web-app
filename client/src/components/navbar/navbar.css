@@ -34,3 +34,16 @@
 .navButton:hover{
   background-color: #b9901d;
 }
+
+.LogoutBtn{
+  margin-left: 20px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #a7262f;
+  color: #ffffff;
+  display:inline-block;
+}
+.LogoutBtn:hover{
+  background-color: #390303;
+}
