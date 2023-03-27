@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import logo from '../../assets/images/icon.svg';
 import LoginBtn from "../LogIn/login";
 import SignupBtn from "../Register/signup";
+import Logout from "../LogIn/logout";
 const Navbar = () => {
   const login = "Login";
   const register = "Register";
@@ -20,7 +21,7 @@ const Navbar = () => {
         {user ?  (
   <div className="navItems">
     <div className="navButton">{user.username}</div>
-    <div className="LogoutBtn">Logout</div>
+    <div className="LogoutBtn"><Logout/></div>
     </div>
 )  : (
           <div className="navItems">
