@@ -61,16 +61,6 @@ export default function LoginBtn(props) {
     const handleClose = () => {
       setOpen(false);
     };
-  
-    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    //   event.preventDefault();
-    //   const data = new FormData(event.currentTarget);
-    //   console.log({
-    //     email: data.get('email'),
-    //     password: data.get('password'),
-    //   });
-    // };
-
   return (
     <div>
      <button variant="outlined" className="headerBtn" onClick={handleClickOpen}>{props.name}</button>
@@ -106,8 +96,6 @@ export default function LoginBtn(props) {
               onChange={handleChange}
               className="lInput"
               label="Email Address"
-              id="username"
-              onChange={handleChange}
               autoComplete="email"
               autoFocus
             />

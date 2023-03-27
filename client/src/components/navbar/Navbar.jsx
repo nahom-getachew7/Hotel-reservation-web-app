@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import logo from '../../assets/images/icon.svg';
 import LoginBtn from "../LogIn/login";
 import SignupBtn from "../Register/signup";
-import Logout from "../LogIn/logout";
+import Logout from "../Logout/logout";
 const Navbar = () => {
   const login = "Login";
   const register = "Register";
