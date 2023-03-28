@@ -90,8 +90,8 @@ export default function LoginBtn(props) {
               margin="normal"
               required
               fullWidth
-              id="username"
-              placeholder='username'
+              id="email"
+              placeholder='Email'
               type= "text"
               onChange={handleChange}
               className="lInput"

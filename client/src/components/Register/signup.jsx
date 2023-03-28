@@ -61,7 +61,7 @@ const handleClick = async (e) => {
      result = await axios.post(         
       "http://localhost:8800/api/auth/register",         
       {  
-    username: credentials["username"],
+    fullName: credentials["fullName"],
     email :  credentials["email"],
     img:credentials["img"],
     city:credentials["city"],
@@ -114,18 +114,39 @@ const handleClick = async (e) => {
           </Typography>
           <Box component="form" noValidate onSubmit={handleCloses} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   required
                   fullWidth
-                  id="username"
+                  id="fullName"
                   onChange={handleChange}
                   label="Full Name"
                   autoFocus
                 />
               </Grid>
-          
+          <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  required
+                  fullWidth
+                  id="city"
+                  onChange={handleChange}
+                  label="City"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  required
+                  fullWidth
+                  id="phone"
+                  onChange={handleChange}
+                  label="Phone Number"
+                  autoFocus
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required

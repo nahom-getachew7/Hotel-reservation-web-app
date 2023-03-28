@@ -20,7 +20,7 @@ const Navbar = () => {
         </Link>
         {user ?  (
   <div className="navItems">
-    <div className="navButton">{user.username}</div>
+    <div className="navButton">{user.fullName}</div>
     <div className="LogoutBtn"><Logout/></div>
     </div>
 )  : (
