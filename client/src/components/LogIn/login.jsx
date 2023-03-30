@@ -19,15 +19,25 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useFormik } from "formik";
 import { AuthContext } from "../../context/AuthContext";
+import { basicSchema } from '../../context/schemas';
 
 
 const theme = createTheme();
 
 export default function LoginBtn(props) {
   //LogIN
+//   const formik = useFormik({
+//     // initialValues:{
+//     //   // email: "",
+//     //   // password: "",
+//     // },
+//     // validationSchema: basicSchema,
+//     // handleClick,
+// });
   const [credentials, setCredentials] = useState({
-    username: undefined,
+    email: undefined,
     password: undefined,
   });
 
@@ -92,8 +102,10 @@ export default function LoginBtn(props) {
               fullWidth
               id="email"
               placeholder='Email'
-              type= "text"
+              type= "email"
               onChange={handleChange}
+              // onBlur = {handleBlur}
+              // value = {values.email}
               className="lInput"
               label="Email Address"
               autoComplete="email"
@@ -108,6 +120,8 @@ export default function LoginBtn(props) {
               type="password"
               id="password"
               onChange={handleChange}
+              // onBlur = {handleBlur}
+              // value = {values.password}
               className="lInput"
               placeholder='Password'
 
