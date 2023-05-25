@@ -63,6 +63,7 @@ const handleClick = async (e) => {
       {  
     username: credentials["username"],
     email :  credentials["email"],
+    country: credentials["country"],
     img:credentials["img"],
     city:credentials["city"],
     phone: credentials["phone"],
@@ -70,8 +71,8 @@ const handleClick = async (e) => {
     isAdmin: credentials["isAdmin"]
       }
     );
-    // console.log(result["status"]);
-    // console.log(result["data"]);
+    console.log("8888888888888",result["status"]);
+    console.log("****************",result["data"]);
     if (result["data"] == "User has been created." && result["status"] =="200"){
       console.log(result["status"]);
       console.log(result["data"]);
