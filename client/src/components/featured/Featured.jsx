@@ -3,7 +3,7 @@ import "./featured.css";
 // import proxy from '../../../../../setupProxy.js'
 const Featured = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:8800/api/hotels/countByCity?cities=Addis Ababa,Addis Ababa df,london"
+    "http://localhost:8800/api/hotels/countByCity?cities=Addis Ababa,Adama,Bahirdar"
   );
     console.log(data);
     console.log("data");
@@ -20,8 +20,8 @@ const Featured = () => {
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>Berlin11</h1>
-              <h2>{data[0]} properties ssss</h2>
+              <h1>Addis Ababa</h1>
+              <h2>{data[0]} properties</h2>
             </div>
           </div>
 
@@ -32,7 +32,7 @@ const Featured = () => {
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>Madrid 222</h1>
+              <h1>Adama</h1>
               <h2>{data[1]} properties</h2>
             </div>
           </div>
@@ -43,7 +43,7 @@ const Featured = () => {
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>London1</h1>
+              <h1>Bahirdar</h1>
               <h2>{data[2]} properties</h2>
             </div>
           </div>
