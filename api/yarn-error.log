@@ -1,29 +1,29 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
 
 PATH: 
-  C:\Users\Hp\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Hp\bin;C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn;C:\Program Files\Microsoft SQL Server\150\DTS\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\Program Files\Azure Data Studio\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\dotnet;C:\Users\Hp\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\Hp\AppData\Local\Programs\Python\Python310;C:\Users\Hp\AppData\Local\Microsoft\WindowsApps;C:\Users\Hp\AppData\Local\Programs\Microsoft VS Code\bin;C:\Flex Windows\gcc\bin;C:\Flex Windows\Lex\bin;C:\Flex Windows\bison\bin;C:\Users\Hp\AppData\Roaming\npm;C:\src\flutter\bin;C:\platform-tools;C:\Users\Hp\AppData\Local\Android\Sdk\platform-tools;C:\Users\Hp\.dotnet\tools;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;C:\Program Files\Java\jdk-17.0.1\bin;C:\Program Files\Git\cmd;C:\Program Files\OpenSSL-Win64\bin;C:\Users\HP\AppData\Local\Microsoft\WindowsApps;C:\Users\HP\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HP\AppData\Roaming\npm;C:\Users\HP\AppData\Local\GitHubDesktop\bin;C:\MinGW\bin;C:\php;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\bin;C:\Program Files\MongoDB\Server\6.0\bin
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  18.12.1
+  17.3.0
 
 Platform: 
   win32 x64
 
 Trace: 
-  SyntaxError: Invalid value type 67:0 in A:\ALX\Final project ALX\New folder\Hotel-reservation-web-app\api\yarn.lock
-      at Parser.unexpected (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63491:11)
-      at Parser.parse (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63619:16)
-      at Parser.parse (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63596:26)
-      at parse (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63696:21)
-      at module.exports.exports.default (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63258:96)
-      at Function.<anonymous> (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:3068:63)
+  SyntaxError: Invalid value type 67:0 in C:\Users\HP\Desktop\Hotel\Hotel-reservation-web-app\api\yarn.lock
+      at Parser.unexpected (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63491:11)
+      at Parser.parse (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63619:16)
+      at Parser.parse (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63596:26)
+      at parse (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63696:21)
+      at module.exports.exports.default (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:63258:96)
+      at Function.<anonymous> (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:3068:63)
       at Generator.next (<anonymous>)
-      at step (C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\Hp\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+      at step (C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\HP\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
 
 npm manifest: 
   {

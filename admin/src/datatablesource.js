@@ -1,14 +1,14 @@
 export const userColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "user",
+    field: "fullName",
     headerName: "User",
     width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           <img className="cellImg" src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="avatar" />
-          {params.row.username}
+          {params.row.fullName}
         </div>
       );
     },
@@ -19,11 +19,11 @@ export const userColumns = [
     width: 230,
   },
 
-  {
-    field: "country",
-    headerName: "Country",
-    width: 100,
-  },
+  // {
+  //   field: "country",
+  //   headerName: "Country",
+  //   width: 100,
+  // },
   {
     field: "city",
     headerName: "City",
