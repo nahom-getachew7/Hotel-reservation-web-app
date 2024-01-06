@@ -1,6 +1,6 @@
 .header {
-  background-color: #406ba6;
-  color: white;
+  background-color: transparent;
+  color: black;
   display: flex;
   justify-content: center;
   position: relative;
@@ -8,8 +8,9 @@
 
 .headerContainer {
   width: 100%;
-  max-width: 1024px;
-  margin: 20px 0px 100px 0px;
+  max-width: 1300px;
+  /* margin: 20px 0px 100px 0px; */
+  padding-bottom: 38px;
 }
 
 .headerContainer.listMode {
@@ -44,15 +45,17 @@
   color: white;
   font-weight: 500;
   border: none;
-  padding: 10px;
+  padding: 2px;
   cursor: pointer;
+  height: 45px;
+  width: 350px;
 }
 .headerBtn:hover{
   background-color: #b9901d;
 }
 
 .headerSearch {
-  height: 30px;
+  height: 50px;
   background-color: white;
   border: 3px solid #febb02;
   display: flex;

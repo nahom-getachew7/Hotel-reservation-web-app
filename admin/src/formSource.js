@@ -34,6 +34,12 @@ export const userInputs = [
     type: "text",
     placeholder: "USA",
   },
+  // {
+  //   id: "isAdmin",
+  //   label: "IsAdmin",
+  //   type: "text",
+  //   placeholder: "NO",
+  // },
 ];
 
 export const productInputs = [

@@ -7,42 +7,59 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
+import Footer from "../../components/footer/Footer";
 
 const List = () => {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
-  const [dates, setDates] = useState(location.state.dates);
+  const [dates, setDates] = useState(
+    location.state?.dates || [
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "selection",
+      },
+    ]
+  );
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options, setOptions] = useState(location.state?.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
+  const [serdest, setSerdest] = useState();
 
   const { data, loading, error, reFetch } = useFetch(
     `http://localhost:8800/api/hotels?city=${destination}`
   );
 
   const handleClick = () => {
+    setDestination(serdest[0]);
     reFetch();
   };
+  
 
   return (
     <div>
       <Navbar />
       <Header type="list" />
-      <div className="listContainer">
+      <div className="listContainer h-full pt-24 flex justify-center bg-slate-100">
         <div className="listWrapper">
           <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input placeholder={destination} type="text" />
+              <input
+                name="cityInput"
+                placeholder={destination}
+                type="text"
+                onChange={(e) => setSerdest([e.target.value])}
+              />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                dates[0].startDate,
+                dates[0]?.startDate,
                 "MM/dd/yyyy"
-              )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(dates[0]?.endDate, "MM/dd/yyyy")}`}</span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDates([item.selection])}
@@ -52,8 +69,8 @@ const List = () => {
               )}
             </div>
             <div className="lsItem">
-              <label>Options</label>
-              <div className="lsOptions">
+              <label>Options?</label>
+              <div className="lsOptions?">
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Min price <small>per night</small>
@@ -80,7 +97,7 @@ const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.adult}
+                    placeholder={options?.adult}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -89,7 +106,7 @@ const List = () => {
                     type="number"
                     min={0}
                     className="lsOptionInput"
-                    placeholder={options.children}
+                    placeholder={options?.children}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -98,7 +115,7 @@ const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.room}
+                    placeholder={options?.room}
                   />
                 </div>
               </div>
@@ -106,18 +123,15 @@ const List = () => {
             <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult">
-            {loading ? (
-              "loading"
-            ) : (
-              <>
-                {data.map((item) => (
-                  <SearchItem item={item} key={item._id} />
-                ))}
-              </>
-            )}
+            {loading
+              ? "loading"
+              : Array.isArray(data)
+              ? data.map((item) => <SearchItem item={item} key={item._id} />)
+              : "No data available"}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

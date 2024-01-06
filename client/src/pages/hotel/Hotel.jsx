@@ -15,6 +15,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Hotel = () => {
   const location = useLocation();
   console.log("Location " + location)
@@ -25,7 +27,9 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  const { data, loading, error } = useFetch(
+    `http://localhost:8800/api/hotels/${id}`
+  );
 
 
   const { user } = useContext(AuthContext);
@@ -60,10 +64,32 @@ const Hotel = () => {
   };
 
   const handleClick = () => {
-    if (user) {
+    if (user && days!==0) {
       setOpenModal(true);
+    } else if (!user) {
+      // alert('Please Login first To book');
+      toast.error("Please Login first To book", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // navigate("/");
     } else {
-      navigate("/");
+      // alert('Please Login first To book');
+      toast.error("Please select a date", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // navigate("/");
     }
   };
   return (
@@ -73,7 +99,7 @@ const Hotel = () => {
       {loading ? (
         "loading"
       ) : (
-        <div className="hotelContainer">
+        <div className="hotelContainer pt-24 bg-slate-100">
           {open && (
             <div className="slider">
               <FontAwesomeIcon
@@ -145,11 +171,12 @@ const Hotel = () => {
               </div>
             </div>
           </div>
-       
+
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      <ToastContainer />
     </div>
   );
 };

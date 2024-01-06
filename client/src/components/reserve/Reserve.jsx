@@ -5,12 +5,22 @@ import "./reserve.css";
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
+  const { user } = useContext(AuthContext);
+
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
+  const [parentRoomId, setParentRoomId] = useState([]);
+
+  console.log("i am hotel id: "+hotelId)
+  const { data, loading, error } = useFetch(
+    `http://localhost:8800/api/hotels/room/${hotelId}`
+  );
+  console.log(data);
+
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -39,32 +49,67 @@ const Reserve = ({ setOpen, hotelId }) => {
     return !isFound;
   };
 
-  const handleSelect = (e) => {
+  const handleSelect = ({e, id}) => {
     const checked = e.target.checked;
     const value = e.target.value;
-    setSelectedRooms(
-      checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
-    );
+      setParentRoomId((prevIds) => ({
+        ...prevIds,
+        [value]: id,
+      }));
+
+      setSelectedRooms((prevRooms) =>
+        checked
+          ? [...prevRooms, value]
+          : prevRooms.filter((item) => item !== value)
+      );
   };
 
   const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
+      // Assuming you have a user ID (replace 'yourUserId' with the actual user ID)
+      console.log(user)
+      console.log(parentRoomId)
+      const userId = user._id;
+
+      // Send reservation data to the backend
+     const response = await axios.post(
+       "http://localhost:8800/api/reservations",
+       {
+         userId,
+         hotelId,
+         roomIds: [parentRoomId[Object.keys(parentRoomId)[0]]],
+         roomNumIds: selectedRooms,
+         dates: alldates,
+       }
+     );
+
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
+          const res = axios.put(
+            `http://localhost:8800/api/rooms/availability/${roomId}`,
+            {
+              dates: alldates,
+            }
+          );
           return res.data;
         })
       );
+      const createdReservation = response.data.reservation;
+      const reservationId = createdReservation._id.toString();
+      await axios.put(`http://localhost:8800/api/users/up/${userId}`, {
+        reservation: [...user.reservation, reservationId],
+      });
+
       setOpen(false);
+      alert("Your room(s) have been booked!");
       navigate("/");
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   };
+
   return (
     <div className="reserve">
       <div className="rContainer">
@@ -91,7 +136,7 @@ const Reserve = ({ setOpen, hotelId }) => {
                   <input
                     type="checkbox"
                     value={roomNumber._id}
-                    onChange={handleSelect}
+                    onChange={(e) => handleSelect({ e, id: item._id })}
                     disabled={!isAvailable(roomNumber)}
                   />
                 </div>

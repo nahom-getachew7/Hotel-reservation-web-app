@@ -12,14 +12,14 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
   ];
   return (
-    <div className="pList">
+    <div className="pList space-x-3">
       {loading ? (
         "loading"
       ) : (
         <>
           {data &&
             images.map((img,i) => (
-              <div className="pListItem" key={i}>
+              <div className="pListItem shadow-lg shadow-cyan-300 bg-cyan-300" key={i}>
                 <img
                   src={img}
                   alt=""

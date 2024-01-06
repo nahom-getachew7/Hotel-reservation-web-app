@@ -1,13 +1,18 @@
+// New.jsx
 import "./new.scss";
+import { useState } from "react";
+import axios from "axios";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingOverlay from "../../components/overlay/overlay";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+  const [isLocalLoading, setIsLocalLoading] = useState(false);
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -15,10 +20,15 @@ const New = ({ inputs, title }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setIsLocalLoading(true);
+
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "upload");
+
     try {
+      toast.info("Processing...");
+
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/do26frsxl/image/upload",
         data
@@ -32,17 +42,21 @@ const New = ({ inputs, title }) => {
       };
 
       await axios.post("/auth/register", newUser);
+      toast.success("User added successfully!");
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLocalLoading(false);
     }
   };
 
-  console.log(info);
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
+        {isLocalLoading && (<LoadingOverlay />)}
         <div className="top">
           <h1>{title}</h1>
         </div>
@@ -58,6 +72,7 @@ const New = ({ inputs, title }) => {
             />
           </div>
           <div className="right">
+            <ToastContainer />
             <form>
               <div className="formInput">
                 <label htmlFor="file">
@@ -82,6 +97,13 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
+              <div className="formInput">
+                <label>Is Admin</label>
+                <select id="isAdmin" onChange={handleChange}>
+                  <option value={false}>No</option>
+                  <option value={true}>Yes</option>
+                </select>
+              </div>
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

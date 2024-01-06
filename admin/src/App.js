@@ -19,12 +19,16 @@ function App() {
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);
 
+    console.log("User:", user);
+
     if (!user) {
+      console.log("Redirecting to /login");
       return <Navigate to="/login" />;
     }
 
     return children;
   };
+
 
   return (
     <div className={darkMode ? "app dark" : "app"}>

@@ -34,7 +34,7 @@ export default function SignupBtn(props) {
       setOpen(false);
     };
     const [credentials, setCredentials] = useState({
-      username:undefined,
+    fullName:undefined,
     email : undefined,
     country:"",
     img:"",
@@ -55,22 +55,35 @@ const handleChange = (e) => {
 
 const handleClick = async (e) => {
   e.preventDefault();
-  // console.log(credentials["username"])
+  console.log(credentials["fullName"])
+  console.log(credentials["email"]);
+  console.log(credentials["city"]);
+  console.log(credentials["password"]);
+
   let result
   try {
      result = await axios.post(         
       "http://localhost:8800/api/auth/register",         
       {  
+       
     fullName: credentials["fullName"],
-    email :  credentials["email"],
+    email : credentials["email"],
     country: credentials["country"],
-    img:credentials["img"],
-    city:credentials["city"],
+    img: credentials["img"],
+    city: credentials["city"],
     phone: credentials["phone"],
     password: credentials["password"],
     isAdmin: credentials["isAdmin"]
+    //     fullName:' credentials["fullName"]',
+    // email : 'emal@gmail.com',
+    // country: 'credentials["country"]',
+    // img:' credentials["img"]',
+    // city: 'credentials["city"]',
+    // phone:' credentials["phone"]',
+    // password:' credentials["password"]',
       }
     );
+    console.log("this are results from axios")
     console.log("8888888888888",result["status"]);
     console.log("****************",result["data"]);
     if (result["data"] == "User has been created." && result["status"] =="200"){
@@ -78,9 +91,9 @@ const handleClick = async (e) => {
       console.log(result["data"]);
       alert("your haver registerd you can login now");
       window.location.reload(false);
-     
-
     
+
+
     }
 
   } catch (error) {
@@ -91,106 +104,114 @@ const handleClick = async (e) => {
 
   return (
     <div>
-     
-           <Dialog open={open} onClose={handleCloses}>
+      <Dialog open={open} onClose={handleCloses}>
         <DialogTitle>Sign in</DialogTitle>
         <DialogContent>
-          
-        <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleCloses} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  required
-                  fullWidth
-                  id="fullName"
-                  onChange={handleChange}
-                  label="Full Name"
-                  autoFocus
-                />
-              </Grid>
-          <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  required
-                  fullWidth
-                  id="city"
-                  onChange={handleChange}
-                  label="City"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  required
-                  fullWidth
-                  id="phone"
-                  onChange={handleChange}
-                  label="Phone Number"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  onChange={handleChange}
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  onChange={handleChange}
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
-            <Button
-             onClick={handleClick}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign up
+                </Typography>
+                <Box
+                  component="form"
+                  noValidate
+                  onSubmit={handleCloses}
+                  sx={{ mt: 3 }}
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <TextField
+                        autoComplete="given-name"
+                        required
+                        fullWidth
+                        id="fullName"
+                        onChange={handleChange}
+                        label="Full Name"
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        autoComplete="given-name"
+                        required
+                        fullWidth
+                        id="city"
+                        onChange={handleChange}
+                        label="City"
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        autoComplete="given-name"
+                        required
+                        fullWidth
+                        id="phone"
+                        onChange={handleChange}
+                        label="Phone Number"
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        onChange={handleChange}
+                        autoComplete="email"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        onChange={handleChange}
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Button
+                    onClick={handleClick}
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign Up
+                  </Button>
+                </Box>
+              </Box>
+            </Container>
+          </ThemeProvider>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloses}>Cancel</Button>
         </DialogActions>
       </Dialog>
-      <button variant="outlined" className="headerBtn"  onClick={handleClickOpen}>{props.name}</button>
+      <button
+        variant="outlined"
+        className="bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+        onClick={handleClickOpen}
+      >
+        {props.name}
+      </button>
     </div>
   );
 }

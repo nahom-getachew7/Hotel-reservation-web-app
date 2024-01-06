@@ -63,28 +63,28 @@ const Header = ({ type }) => {
       >
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">
-            WELCOME
-            </h1>
-            <p className="headerDesc">
-            Experience our premier destination for luxury accommodations and exceptional service.
-             Explore our elegant hotels, featuring stunning views and unparalleled amenities.
+            <h1 className="headerTitle text-white">WELCOME</h1>
+            <p className="headerDesc text-white">
+              Experience our premier destination for luxury accommodations and
+              exceptional service. Explore our elegant hotels, featuring
+              stunning views and unparalleled amenities.
             </p>
-            <div className="headerSearch">
+            <div className="flex justify-between items-center bg-gray-700 border-4 border-yellow-400 border-solid rounded-3xl mt-10">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
                 <input
                   type="text"
                   placeholder="Where are you going?"
-                  className="headerSearchInput"
+                  className="headerSearchInput bg-transparent placeholder:text-white"
                   onChange={(e) => setDestination(e.target.value)}
+                  required
                 />
               </div>
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
                   onClick={() => setOpenDate(!openDate)}
-                  className="headerSearchText"
+                  className="headerSearchText felx flex-col"
                 >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
                   dates[0].endDate,
                   "MM/dd/yyyy"
@@ -95,7 +95,7 @@ const Header = ({ type }) => {
                     onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
                     ranges={dates}
-                    className="date"
+                    className="date mt-40 bg-slate-100 rounded-md"
                     minDate={new Date()}
                   />
                 )}
@@ -107,7 +107,7 @@ const Header = ({ type }) => {
                   className="headerSearchText"
                 >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
                 {openOptions && (
-                  <div className="options">
+                  <div className="options -mt-10 shadow-lg bg-slate-100">
                     <div className="optionItem">
                       <span className="optionText">Adult</span>
                       <div className="optionCounter">
@@ -174,8 +174,11 @@ const Header = ({ type }) => {
                   </div>
                 )}
               </div>
-              <div className="headerSearchItem">
-                <button className="headerBtn" onClick={handleSearch}>
+              <div className="rounded-3xl">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-24 m-0 rounded-3xl"
+                  onClick={handleSearch}
+                >
                   Search
                 </button>
               </div>
